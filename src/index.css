@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  SlideAI — Modern Charcoal Theme
+  Warm neutral charcoal base, subtle amber/bone accent, no bright colors.
+  Inspired by Vercel / Linear / Arc — quiet, confident, editorial.
+*/
+
+@layer base {
+  :root {
+    /* Core surfaces — warm charcoal scale */
+    --background: 30 6% 7%;            /* near-black, slight warmth */
+    --foreground: 40 12% 94%;          /* bone */
+
+    --card: 30 5% 10%;
+    --card-foreground: 40 12% 94%;
+
+    --popover: 30 5% 11%;
+    --popover-foreground: 40 12% 94%;
+
+    /* Primary = bone/off-white (monochrome confident accent) */
+    --primary: 40 18% 92%;
+    --primary-foreground: 30 8% 9%;
+
+    --secondary: 30 5% 14%;
+    --secondary-foreground: 40 10% 88%;
+
+    --muted: 30 4% 16%;
+    --muted-foreground: 35 6% 58%;
+
+    --accent: 30 5% 16%;
+    --accent-foreground: 40 12% 94%;
+
+    --destructive: 6 55% 52%;
+    --destructive-foreground: 40 12% 96%;
+
+    --border: 30 5% 18%;
+    --input: 30 5% 18%;
+    --ring: 35 25% 70%;
+    --radius: 0.875rem;
+
+    /* Editor-specific */
+    --editor-bg: 30 6% 6%;
+    --editor-surface: 30 5% 10%;
+    --editor-toolbar: 30 5% 11%;
+    --editor-canvas-bg: 30 6% 5%;
+    --editor-selection: 35 25% 70%;
+    --editor-handle: 40 18% 92%;
+    --editor-slide: 40 12% 96%;
+    --editor-slide-fg: 30 8% 10%;
+    --editor-thumb-border: 30 5% 22%;
+    --editor-hover: 30 5% 16%;
+
+    /* Sidebar */
+    --sidebar-background: 30 6% 8%;
+    --sidebar-foreground: 40 8% 78%;
+    --sidebar-primary: 40 18% 92%;
+    --sidebar-primary-foreground: 30 8% 9%;
+    --sidebar-accent: 30 5% 14%;
+    --sidebar-accent-foreground: 40 10% 90%;
+    --sidebar-border: 30 5% 14%;
+    --sidebar-ring: 35 25% 70%;
+
+    /* Slide colors (light slides on dark UI) */
+    --slide-bg: 40 12% 96%;
+    --slide-fg: 30 8% 10%;
+
+    /* Subtle warm accent for highlights — used sparingly */
+    --warm-glow: 35 35% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html, body {
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv11";
+    background-image:
+      radial-gradient(1200px 600px at 20% -10%, hsl(35 20% 20% / 0.15), transparent 60%),
+      radial-gradient(900px 500px at 100% 100%, hsl(30 10% 14% / 0.4), transparent 70%);
+    background-attachment: fixed;
+  }
+
+  .font-display {
+    font-family: 'Instrument Serif', 'Times New Roman', serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  /* Glass surface — subtle, not flashy */
+  .glass {
+    background: hsl(30 5% 10% / 0.65);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid hsl(40 10% 100% / 0.06);
+  }
+
+  .glass-strong {
+    background: hsl(30 5% 11% / 0.85);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid hsl(40 10% 100% / 0.08);
+  }
+
+  .hairline {
+    border: 1px solid hsl(40 10% 100% / 0.06);
+  }
+
+  .hairline-t { border-top: 1px solid hsl(40 10% 100% / 0.06); }
+  .hairline-b { border-bottom: 1px solid hsl(40 10% 100% / 0.06); }
+
+  /* Quiet gradient text — bone to muted, no rainbow */
+  .gradient-text {
+    background: linear-gradient(180deg, hsl(40 18% 96%) 0%, hsl(35 8% 62%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Soft warm glow — used on focused elements only */
+  .glow {
+    box-shadow:
+      0 0 0 1px hsl(40 10% 100% / 0.04),
+      0 20px 60px -20px hsl(0 0% 0% / 0.6),
+      0 0 40px -12px hsl(35 35% 50% / 0.15);
+  }
+
+  .glow-sm {
+    box-shadow:
+      0 0 0 1px hsl(40 10% 100% / 0.04),
+      0 8px 24px -10px hsl(0 0% 0% / 0.5);
+  }
+
+  /* Card hover — lift + faint warm edge */
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.4s ease;
+  }
+  .card-hover:hover {
+    background-color: hsl(30 5% 12%);
+    border-color: hsl(40 10% 100% / 0.12);
+    transform: translateY(-3px);
+    box-shadow:
+      0 24px 60px -24px hsl(0 0% 0% / 0.7),
+      0 0 0 1px hsl(40 10% 100% / 0.05);
+  }
+
+  /* Pill button base */
+  .pill {
+    border-radius: 999px;
+    transition: all 0.2s ease;
+  }
+
+  /* Inset highlight — top edge bright line on raised surfaces */
+  .inset-highlight {
+    box-shadow:
+      inset 0 1px 0 hsl(40 18% 100% / 0.06),
+      0 1px 2px hsl(0 0% 0% / 0.4);
+  }
+
+  /* Ambient radial used behind hero */
+  .ambient-glow {
+    background: radial-gradient(
+      60% 50% at 50% 30%,
+      hsl(35 25% 30% / 0.35),
+      transparent 70%
+    );
+  }
+
+  /* Thin scrollbar variant */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(30 4% 22%);
+    border-radius: 999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(30 4% 30%);
+  }
+
+  /* Animated noise overlay — adds film grain feel (optional, very subtle) */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+}
+
+/* Slide content font */
+.slide-content {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Global scrollbar — quiet */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(30 4% 20%);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(30 4% 30%);
+  background-clip: content-box;
+  border: 2px solid transparent;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInSlow {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.7; }
+}
+
+.animate-fade-in        { animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.animate-fade-in-slow   { animation: fadeInSlow 0.8s ease-out both; }
+.animate-slide-in       { animation: slideIn 0.3s ease-out both; }
+.animate-pulse-glow     { animation: pulseGlow 3s ease-in-out infinite; }
+
+/* Shimmer skeleton */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(30 5% 12%) 0%,
+    hsl(30 5% 16%) 50%,
+    hsl(30 5% 12%) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Focus ring — warm, subtle */
+*:focus-visible {
+  outline: 2px solid hsl(35 25% 70% / 0.6);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
