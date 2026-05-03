@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Home, FolderOpen, PanelLeftClose, PanelLeft, Plus, MessageSquare, Sparkles,
-} from 'lucide-react';
+import { Chrome as Home, FolderOpen, PanelLeftClose, PanelLeft, Plus, MessageSquare, Sparkles } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { usePresentations } from '@/context/PresentationContext';
 
@@ -25,13 +23,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     <div className="flex h-screen overflow-hidden bg-background">
       <AnimatePresence mode="wait">
         {sidebarOpen && (
-          <motion.aside
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: 280, opacity: 1 }}
-            exit={{ width: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            className="h-full border-r border-border flex flex-col bg-sidebar overflow-hidden shrink-0"
-          >
+          <>
+            <motion.aside
+              initial={{ x: -280, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -280, opacity: 0 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+              className="fixed left-0 top-0 h-full w-80 border-r border-border flex flex-col bg-sidebar overflow-hidden z-40 md:static md:z-auto"
+            >
             <div className="flex items-center justify-between p-4 pb-2">
               <Link to="/" className="flex items-center gap-2 group" onClick={() => setCurrentConversation(null)}>
                 <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center glow-sm">
@@ -107,7 +106,16 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <ThemeToggle />
               <span className="text-xs text-muted-foreground">Powered by Gemini</span>
             </div>
-          </motion.aside>
+            </motion.aside>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 z-30 md:hidden"
+            />
+          </>
         )}
       </AnimatePresence>
 
@@ -115,7 +123,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         {!sidebarOpen && (
           <button
             onClick={() => setSidebarOpen(true)}
-            className="absolute top-4 left-4 z-10 p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-colors"
+            className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground transition-colors md:hidden"
           >
             <PanelLeft className="w-4 h-4" />
           </button>

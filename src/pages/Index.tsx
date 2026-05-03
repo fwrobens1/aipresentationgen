@@ -86,12 +86,13 @@ const Index = () => {
 
       {/* Top bar */}
       <header className="relative z-10 flex items-center justify-between px-6 py-4 hairline-b">
-        <div className="flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2">
           <div className="grid size-7 place-items-center rounded-md bg-foreground text-background">
             <Sparkles className="size-3.5" strokeWidth={2.5} />
           </div>
           <span className="text-[13px] font-medium tracking-tight">SlideAI</span>
         </div>
+        <div className="flex-1" />
         <button className="grid size-9 place-items-center rounded-full bg-secondary hover:bg-accent border border-border text-muted-foreground hover:text-foreground transition-all">
           <User className="size-4" />
         </button>
@@ -99,7 +100,7 @@ const Index = () => {
 
       <main className="relative z-10 flex flex-1 flex-col min-h-0">
         {messages.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center px-6 -mt-10">
+          <div className="flex flex-1 flex-col items-center justify-center px-4 md:px-6 -mt-10">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -114,19 +115,19 @@ const Index = () => {
 
               <p className="text-sm text-muted-foreground mb-3 font-light">{getGreeting()}</p>
 
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] gradient-text">
+              <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] gradient-text">
                 What will you<br />
                 <em className="not-italic text-muted-foreground/80">present today?</em>
               </h1>
 
-              <p className="mt-6 text-[14px] leading-relaxed text-muted-foreground max-w-md mx-auto">
+              <p className="mt-4 md:mt-6 text-sm md:text-[14px] leading-relaxed text-muted-foreground max-w-md mx-auto">
                 Describe your topic and SlideAI will craft a polished deck — complete with imagery — in seconds.
               </p>
             </motion.div>
           </div>
         ) : (
           <div className="flex-1 overflow-y-auto min-h-0">
-            <div className="mx-auto max-w-3xl px-6 py-10 space-y-6">
+            <div className="mx-auto max-w-3xl px-4 md:px-6 py-6 md:py-10 space-y-6">
               <AnimatePresence initial={false}>
                 {messages.map(msg => (
                   <motion.div
@@ -209,7 +210,7 @@ const Index = () => {
           </div>
         )}
 
-        <div className="relative px-4 pb-8 pt-4">
+        <div className="relative px-4 md:px-6 pb-8 pt-4">
           <ChatInput onSend={handleSend} isLoading={isLoading} />
         </div>
       </main>
