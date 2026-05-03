@@ -1,4 +1,4 @@
-import { Slide } from '@/types/slide';
+import { Slide } from '@/types/presentation';
 
 interface SlideRendererProps {
   slide: Slide;
@@ -6,14 +6,23 @@ interface SlideRendererProps {
 }
 
 export function SlideRenderer({ slide, className = '' }: SlideRendererProps) {
+  if (!slide || !slide.layout) {
+    return (
+      <div className={`relative w-full aspect-video bg-slide-bg text-slide-fg overflow-hidden rounded-lg flex items-center justify-center ${className}`}>
+        <div className="text-muted-foreground text-sm">Slide data unavailable</div>
+      </div>
+    );
+  }
+
+  const layout = slide.layout;
   return (
     <div className={`relative w-full aspect-video bg-slide-bg text-slide-fg overflow-hidden rounded-lg flex items-center justify-center ${className}`}>
       <div className="w-full h-full">
-        {slide.layout === 'title' && <TitleLayout slide={slide} />}
-        {slide.layout === 'content' && <ContentLayout slide={slide} />}
-        {slide.layout === 'image-left' && <ImageTextLayout slide={slide} imageFirst />}
-        {slide.layout === 'image-right' && <ImageTextLayout slide={slide} />}
-        {slide.layout === 'full-image' && <FullImageLayout slide={slide} />}
+        {layout === 'title' && <TitleLayout slide={slide} />}
+        {layout === 'content' && <ContentLayout slide={slide} />}
+        {layout === 'image-left' && <ImageTextLayout slide={slide} imageFirst />}
+        {layout === 'image-right' && <ImageTextLayout slide={slide} />}
+        {layout === 'full-image' && <FullImageLayout slide={slide} />}
       </div>
     </div>
   );
